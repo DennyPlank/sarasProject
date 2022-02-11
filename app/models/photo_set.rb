@@ -1,0 +1,2 @@
+class PhotoSet < ApplicationRecord
+end

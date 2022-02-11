@@ -6,21 +6,35 @@ import { AuthContext } from '../providers/AuthProvider';
 const Layout = () => {
   const navigate = useNavigate();
 
-  const {authenticated, handleLogout} = useContext(AuthContext);
+  const renderUIPhoto = () => {
+    return (
+      <div>
+           <Nav className="justify-content-center" activeKey="/home">
+              Logo / Photo Here
+           </Nav>
+      </div>
+    );
+  };
 
-  const renderUILinks =()=>{
-    if(authenticated){
+  const renderUILinks = () => {
       return(
-        <Button onClick={()=>handleLogout(navigate)}>Logout</Button>
-      )
-    } else {
-      return(
-        <>
-          <Nav.Link eventKey = "/login">Login</Nav.Link>
-          <Nav.Link eventKey = "/register">New User</Nav.Link>
-        </>
-      )
-    };
+        <div>
+           <Nav className="justify-content-center" activeKey="/home" onSelect={handleSelect}>
+              <Nav.Item>
+                <Nav.Link href="/home">Home</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="/photos">Photos</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="/contact">Contact</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="/about">About</Nav.Link>
+              </Nav.Item>
+           </Nav>
+        </div>
+      );
   };
 
   const handleSelect = (eventKey) => {
@@ -29,21 +43,10 @@ const Layout = () => {
 
   return(
     <>
-      <Navbar expand = "md" bg = "dark" variant = "dark">
-        <Container>
-          <Navbar.Brand onClick = {()=>navigate("/")}>Cool Logo</Navbar.Brand>
-          <Navbar.Toggle aria-controls="response-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto" onSelect = {handleSelect}>
-              <Nav.Link eventKey = "/">Home</Nav.Link>
-              <Nav.Link eventKey = "/protected">Protected</Nav.Link>
-            </Nav>
-            <Nav className="justify-content-end" onSelect = {handleSelect}>
-              {renderUILinks()}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+          <Container>
+                {renderUIPhoto()}
+                {renderUILinks()}
+          </Container>
       <Outlet />
     </>
   );
