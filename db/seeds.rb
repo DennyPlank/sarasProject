@@ -8,11 +8,14 @@
 
 require "faker"
 
-u1 = User.create(email:"test@test.com", password: 123456)
 
 10.times do
-  User.create(
-    email:Faker::Internet.unique.email, 
-    password: Faker::Internet.password(min_length: 6),
+  PhotoSet.create(
+    pointer: "This is a faker  lead url",
+    leadPointer: "This is a faker url",
+    location: Faker::Address.street_name,
+    name: Faker::Name.name
   )
 end
+
+puts '10 photos seeds'
