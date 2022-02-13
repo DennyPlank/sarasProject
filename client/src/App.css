@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+#homeCards {
+  max-width: 20%;
+}
